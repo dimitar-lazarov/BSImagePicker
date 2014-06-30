@@ -26,10 +26,17 @@
 
 - (void)didUpdateModel:(id<BSItemsModel>)aModel {
     [self.collectionView performBatchUpdates:^{
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
-                                    atScrollPosition:UICollectionViewScrollPositionTop
-                                            animated:YES];
+        
+        if ([self.collectionView numberOfSections] > 0) {
+            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+        }
+        
+        if ([self.collectionView numberOfItemsInSection:0]) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
+                                        atScrollPosition:UICollectionViewScrollPositionTop
+                                                animated:YES];
+        }
+        
     } completion:nil];
 }
 
